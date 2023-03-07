@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[Bài tập] Phát triển ứng dụng nhỏ mô phỏng câu chuyện Adam và Eva</title>
+</head>
+<body>
+<div></div>
+<script>
+    function Apple() {
+        this.weight = 10;
+    }
+
+    Apple.prototype.decrease = function () {
+        return this.weight--;
+    }
+
+    Apple.prototype.isEmpty = function () {
+        if (this.weight <= 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    Apple.prototype.getWeight = function () {
+        return this.weight;
+    }
+
+    function Human(name, weight) {
+        this.name = name;
+        this.weight = weight;
+        this.gender = "";
+
+        this.isMale = function () {
+            if(this.gender === "male") {
+                return true
+            } else {
+                return false
+            }
+
+        }
+        this.setGender = function (sex) {
+            this.gender = sex;
+        }
+    }
+
+    Human.prototype.eatApple = function (apple) {
+        if (!apple.isEmpty() && this.isMale()&& (apple.weight>=2)) {
+            this.weight += 2;
+            apple.decrease();
+            apple.decrease();
+        } else {
+            if (!apple.isEmpty()&& (apple.weight>=1)) {
+                this.weight += 1;
+                apple.decrease();
+            }
+        }
+
+    }
+
+    function theStory() {
+        let Adam = new Human('Adam', 100);
+        let Eva = new Human("Eva", 50);
+        let apple = new Apple();
+        Adam.setGender("male");
+        Eva.setGender("female");
+        while (apple.weight > 0) {
+            document.write("Khoi luong cua apple:" + apple.weight + "<br>");
+            document.write("Khoi luong cua Adam:" + Adam.weight + "<br>");
+            Adam.eatApple(apple);
+            document.write("Adam dop tao"+"<br>");
+            document.write("Khoi luong cua apple:" + apple.weight + "<br>");
+            document.write("Khoi luong cua Adam:" + Adam.weight + "<br>");
+
+
+
+            document.write("Khoi luong cua Eva:" + Eva.weight + "<br>");
+            document.write("Khoi luong cua apple:" + apple.weight + "<br>");
+            Eva.eatApple(apple);
+            document.write("Eva dop tao"+"<br>");
+            document.write("Khoi luong cua Eva:" + Eva.weight + "<br>");
+            document.write("Khoi luong cua apple:" + apple.weight + "<br>");
+
+        }
+    }
+
+    theStory();
+
+</script>
+</body>
+</html>
